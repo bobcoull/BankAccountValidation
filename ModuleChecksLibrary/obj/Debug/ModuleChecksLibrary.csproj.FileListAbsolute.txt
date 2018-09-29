@@ -1,0 +1,13 @@
+C:\bob\git\BankAccountValidtion\ModuleChecksLibrary\bin\Debug\ModuleChecksLibrary.dll
+C:\bob\git\BankAccountValidtion\ModuleChecksLibrary\bin\Debug\ModuleChecksLibrary.pdb
+C:\bob\git\BankAccountValidtion\ModuleChecksLibrary\obj\Debug\ModuleChecksLibrary.csprojAssemblyReference.cache
+C:\bob\git\BankAccountValidtion\ModuleChecksLibrary\obj\Debug\ModuleChecksLibrary.csproj.CoreCompileInputs.cache
+C:\bob\git\BankAccountValidtion\ModuleChecksLibrary\obj\Debug\ModuleChecksLibrary.dll
+C:\bob\git\BankAccountValidtion\ModuleChecksLibrary\obj\Debug\ModuleChecksLibrary.pdb
+C:\bob\git\BankAccountValidtion\ModuleChecksLibrary\bin\Debug\DataAccess.dll
+C:\bob\git\BankAccountValidtion\ModuleChecksLibrary\bin\Debug\DataAccess.Interfaces.dll
+C:\bob\git\BankAccountValidtion\ModuleChecksLibrary\bin\Debug\Entities.dll
+C:\bob\git\BankAccountValidtion\ModuleChecksLibrary\bin\Debug\DataAccess.Interfaces.pdb
+C:\bob\git\BankAccountValidtion\ModuleChecksLibrary\bin\Debug\DataAccess.pdb
+C:\bob\git\BankAccountValidtion\ModuleChecksLibrary\bin\Debug\Entities.pdb
+C:\bob\git\BankAccountValidtion\ModuleChecksLibrary\obj\Debug\ModuleChecksLibrary.csproj.CopyComplete

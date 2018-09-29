@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        Bank Details
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <span>Sort Code:</span>
+        <input type="text" id="sortCode" maxlength="6" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <span>Account No:</span>
+        <input type="text" id="accountNo" maxlength="8" />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <input type="button" value="Validate" onclick="ValidateBankDetails()" />
+    </div>
+</div>
+
+
+
+@section Scripts
+{
+    <script>
+
+        function ValidateBankDetails() {
+            var sortCode = $('#sortCode').val();
+            var accountNo = $('#accountNo').val();
+
+            alert('bob');
+            
+            var uri = 'api/BankDetailsValidate/';
+            $.getJSON(uri,
+                    {
+                        sortCode: sortCode,
+                        accountNo: accountNo
+                    })
+                .done(function (response) {
+                    alert(response);
+                });            
+        }
+    </script>
+}
