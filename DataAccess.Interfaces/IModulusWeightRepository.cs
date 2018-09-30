@@ -9,6 +9,6 @@ namespace DataAccess.Interfaces
 {
     public interface IModulusWeightRepository
     {
-        ModulusWeight GetBySortCode(int sortCode);
+        ModulusWeight GetBySortCode(string sortCode);
     }
 }

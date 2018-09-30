@@ -1,7 +1,12 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
+<style>
+    .result {
+        padding: 0 0 0 10px;
+        font-weight: bold;
+    }
+</style>
 <div class="row">
     <div class="col-md-4">
         Bank Details
@@ -24,6 +29,39 @@
         <input type="button" value="Validate" onclick="ValidateBankDetails()" />
     </div>
 </div>
+<div><hr /></div>
+<div class="row">
+    <div class="col-md-4">
+        Results
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        Is Check Valid:<span class="result" id="isCheckValid"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        Exception Not Processed:<span class="result" id="exceptionNotProcessed"></spanclass="result">
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        Is Sort Code Valid:<span class="result" id="isSortCodeValid"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        Is Account No Valid:<span class="result" id="isAccountNoValid"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        Remainder:<span class="result" id="remainder"></span>
+    </div>
+</div>
+
+
 
 
 
@@ -35,17 +73,19 @@
             var sortCode = $('#sortCode').val();
             var accountNo = $('#accountNo').val();
 
-            alert('bob');
-            
             var uri = 'api/BankDetailsValidate/';
             $.getJSON(uri,
-                    {
-                        sortCode: sortCode,
-                        accountNo: accountNo
-                    })
+                {
+                    sortCode: sortCode,
+                    accountNo: accountNo
+                })
                 .done(function (response) {
-                    alert(response);
-                });            
+                    $("#isCheckValid").text(response.isCheckValid);
+                    $("#exceptionNotProcessed").text(response.exceptionNotProcessed);
+                    $("#isAccountNoValid").text(response.isAccountNoValid);
+                    $("#isSortCodeValid").text(response.isSortCodeValid);
+                    $("#remainder").text(response.remainder);
+                });
         }
     </script>
 }

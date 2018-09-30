@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuleChecksLibrary.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{B1F82C54-575E-430C-A6D9-259C8584C98B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccountValidationWeb", "BankAccountValidationWeb\BankAccountValidationWeb.csproj", "{0E201476-F2EA-4B2A-B71E-A592F26C40B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankAccountValidationWebApi", "BankAccountValidationWeb\BankAccountValidationWebApi.csproj", "{0E201476-F2EA-4B2A-B71E-A592F26C40B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -14,67 +14,71 @@ namespace ModuleChecksLibrary.Tests.ModuleCheckTests
     public class ModulusCheckValidation_Should
     {
         [Test]
-        public void Return_False_If_Sort_Code_Less_Than_100000()
+        public void Return_False_If_Sort_Code_Less_Than_6_Digits()
         {
             // assign
             var modulusCheck = new ModulusCheck();
 
             // act
-            var res = modulusCheck.ModulusCheckValidation(99999, 12345678);
+            var res = modulusCheck.ModulusCheckValidation("99999", "12345678");
 
             // assert
             Assert.AreEqual(false, res.IsCheckValid);
+            Assert.AreEqual(false, res.IsSortCodeValid);
             Assert.AreEqual(null, res.ExceptionNotProcessed);
         }
 
         [Test]
-        public void Return_False_If_Sort_Code_Greater_Than_999999()
+        public void Return_False_If_Sort_Code_Greater_Than_6_Digits()
         {
             // assign
             var modulusCheck = new ModulusCheck();
 
             // act
-            var res = modulusCheck.ModulusCheckValidation(1000000, 12345678);
+            var res = modulusCheck.ModulusCheckValidation("1000000", "12345678");
 
             //assert
             Assert.AreEqual(false, res.IsCheckValid);
+            Assert.AreEqual(false, res.IsSortCodeValid);
             Assert.AreEqual(null, res.ExceptionNotProcessed);
         }
 
         [Test]
-        public void Return_False_If_Account_No_Less_Than_10000000()
+        public void Return_False_If_Account_No_Less_Than_8_Digits()
         {
             // assign
             var modulusCheck = new ModulusCheck();
 
             // act
-            var res = modulusCheck.ModulusCheckValidation(999999, 9999999);
+            var res = modulusCheck.ModulusCheckValidation("999999", "9999999");
 
             // assert
             Assert.AreEqual(false, res.IsCheckValid);
+            Assert.AreEqual(false, res.IsAccountNoValid);
             Assert.AreEqual(null, res.ExceptionNotProcessed);
         }
 
         [Test]
-        public void Return_False_If_Account_No_Greater_Than_99999999()
+        public void Return_False_If_Account_No_Greater_Than_8_Digits()
         {
             // assign
             var modulusCheck = new ModulusCheck();
 
             // act
-            var res = modulusCheck.ModulusCheckValidation(999999, 100000000);
+            var res = modulusCheck.ModulusCheckValidation("999999", "100000000");
 
             // assert
             Assert.AreEqual(false, res.IsCheckValid);
             Assert.AreEqual(null, res.ExceptionNotProcessed);
+            Assert.AreEqual(false, res.IsAccountNoValid);
         }
 
         [Test]
         public void Return_Exception_Not_Processed_For_Exception_Other_Than_4_7()
         {
             // assign
-            int sortCode = 499273;
-            int accountNo = 12345678;
+            string sortCode = "499273";
+            string accountNo = "12345678";
             Mock<IModulusWeightRepository> modulusWeightRepository = new Mock<IModulusWeightRepository>();
 
             ModulusWeight modulusWeight = new ModulusWeight
@@ -102,8 +106,8 @@ namespace ModuleChecksLibrary.Tests.ModuleCheckTests
         public void Return_Exception_Not_Processed_Is_Null_For_Exception_4()
         {
             // assign
-            int sortCode = 499273;
-            int accountNo = 12345678;
+            string sortCode = "499273";
+            string accountNo = "12345678";
             Mock<IModulusWeightRepository> modulusWeightRepository = new Mock<IModulusWeightRepository>();
 
             ModulusWeight modulusWeight = new ModulusWeight
@@ -131,8 +135,8 @@ namespace ModuleChecksLibrary.Tests.ModuleCheckTests
         public void Return_Exception_Not_Processed_Is_Null_For_Exception_7()
         {
             // assign
-            int sortCode = 499273;
-            int accountNo = 12345678;
+            string sortCode = "499273";
+            string accountNo = "12345678";
             Mock<IModulusWeightRepository> modulusWeightRepository = new Mock<IModulusWeightRepository>();
 
             ModulusWeight modulusWeight = new ModulusWeight
@@ -160,8 +164,8 @@ namespace ModuleChecksLibrary.Tests.ModuleCheckTests
         public void Return_True_For_All_Zero_Value_Weights()
         {
             // assign
-            int sortCode = 100000;
-            int accountNo = 10000000;
+            string sortCode = "000000";
+            string accountNo = "00000000";
             Mock<IModulusWeightRepository> modulusWeightRepository = new Mock<IModulusWeightRepository>();
 
             ModulusWeight modulusWeight = new ModulusWeight
@@ -191,8 +195,8 @@ namespace ModuleChecksLibrary.Tests.ModuleCheckTests
         {
             // This is to check all max values do not cause exceptions
             // assign
-            int sortCode = 999999;
-            int accountNo = 99999999;
+            string sortCode = "999999";
+            string accountNo = "99999999";
             Mock<IModulusWeightRepository> modulusWeightRepository = new Mock<IModulusWeightRepository>();
 
             ModulusWeight modulusWeight = new ModulusWeight
@@ -221,8 +225,8 @@ namespace ModuleChecksLibrary.Tests.ModuleCheckTests
         public void Return_True_For_Valid_SortCode_And_AccountNumber_DBLAL()
         {
             // assign
-            int sortCode = 499273;
-            int accountNo = 12345678;
+            string sortCode = "499273";
+            string accountNo = "12345678";
             Mock<IModulusWeightRepository> modulusWeightRepository = new Mock<IModulusWeightRepository>();
 
             ModulusWeight modulusWeight = new ModulusWeight
@@ -251,8 +255,8 @@ namespace ModuleChecksLibrary.Tests.ModuleCheckTests
         public void Return_False_For_InValid_SortCode_And_AccountNumber_DBLAL()
         {
             // assign
-            int sortCode = 499272;
-            int accountNo = 12345678;
+            string sortCode = "499272";
+            string accountNo = "12345678";
             Mock<IModulusWeightRepository> modulusWeightRepository = new Mock<IModulusWeightRepository>();
 
             ModulusWeight modulusWeight = new ModulusWeight
@@ -281,8 +285,8 @@ namespace ModuleChecksLibrary.Tests.ModuleCheckTests
         public void Return_True_For_Valid_SortCode_AccountNumber_MOD11_Exception_7_And_G_9()
         {
             // assign
-            int sortCode = 774110;
-            int accountNo = 12335978;
+            string sortCode = "774110";
+            string accountNo = "12335978";
             Mock<IModulusWeightRepository> modulusWeightRepository = new Mock<IModulusWeightRepository>();
 
             ModulusWeight modulusWeight = new ModulusWeight
@@ -311,8 +315,8 @@ namespace ModuleChecksLibrary.Tests.ModuleCheckTests
         public void Return_True_For_Valid_SortCode_AccountNumber_MOD11()
         {
             // assign
-            int sortCode = 774110;
-            int accountNo = 12335178;
+            string sortCode = "774110";
+            string accountNo = "12335178";
             Mock<IModulusWeightRepository> modulusWeightRepository = new Mock<IModulusWeightRepository>();
 
             ModulusWeight modulusWeight = new ModulusWeight
@@ -341,8 +345,8 @@ namespace ModuleChecksLibrary.Tests.ModuleCheckTests
         public void Return_False_For_InValid_SortCode_AccountNumber_MOD11()
         {
             // assign
-            int sortCode = 774110;
-            int accountNo = 12335179;
+            string sortCode = "774110";
+            string accountNo = "12335179";
             Mock<IModulusWeightRepository> modulusWeightRepository = new Mock<IModulusWeightRepository>();
 
             ModulusWeight modulusWeight = new ModulusWeight
@@ -371,8 +375,8 @@ namespace ModuleChecksLibrary.Tests.ModuleCheckTests
         public void Return_True_For_Valid_SortCode_AccountNumber_MOD10()
         {
             // assign
-            int sortCode = 774110;
-            int accountNo = 12335678;
+            string sortCode = "774110";
+            string accountNo = "12335678";
             Mock<IModulusWeightRepository> modulusWeightRepository = new Mock<IModulusWeightRepository>();
 
             ModulusWeight modulusWeight = new ModulusWeight
@@ -401,8 +405,8 @@ namespace ModuleChecksLibrary.Tests.ModuleCheckTests
         public void Return_False_For_InValid_SortCode_AccountNumber_MOD10()
         {
             // assign
-            int sortCode = 774110;
-            int accountNo = 12135678;
+            string sortCode = "774110";
+            string accountNo = "12135678";
             Mock<IModulusWeightRepository> modulusWeightRepository = new Mock<IModulusWeightRepository>();
 
             ModulusWeight modulusWeight = new ModulusWeight
@@ -427,5 +431,72 @@ namespace ModuleChecksLibrary.Tests.ModuleCheckTests
             Assert.AreEqual(null, res.ExceptionNotProcessed);
         }
 
+        [Test]
+        public void Return_True_For_Valid_SortCode_AccountNumber_MOD11_Exception_4_Reminder_Matches_GH()
+        {
+            //Exception 4:
+            // After you have finished the check, ensure that the remainder is the same as the two-digit
+            // checkdigit; the checkdigit for exception 4 is gh from the original account number
+
+            // assign
+            string sortCode = "774110";
+            string accountNo = "12335504";
+            Mock<IModulusWeightRepository> modulusWeightRepository = new Mock<IModulusWeightRepository>();
+
+            ModulusWeight modulusWeight = new ModulusWeight
+            {
+                SortCodeStart = 774100,
+                SortCodeEnd = 774599,
+                ModCheck = "MOD11",
+                WeightU = 5, WeightV = 8, WeightW = 6, WeightX = 2, WeightY = 3, WeightZ = 4,
+                WeightA = 2, WeightB = 1, WeightC = 2, WeightD = 1, WeightE = 2, WeightF = 1, WeightG = 7, WeightH = 8,
+                Exception = 4
+            };
+
+            modulusWeightRepository.Setup(x => x.GetBySortCode(sortCode)).Returns(modulusWeight);
+
+            var modulusCheck = new ModulusCheck(modulusWeightRepository.Object);
+
+            // act
+            var res = modulusCheck.ModulusCheckValidation(sortCode, accountNo);
+
+            // assert
+            Assert.AreEqual(true, res.IsCheckValid);
+            Assert.AreEqual(null, res.ExceptionNotProcessed);
+        }
+
+        [Test]
+        public void Return_False_For_Valid_SortCode_AccountNumber_MOD11_Exception_4_Reminder_Doesnt_Matche_GH()
+        {
+            //Exception 4:
+            // After you have finished the check, ensure that the remainder is the same as the two-digit
+            // checkdigit; the checkdigit for exception 4 is gh from the original account number
+
+            // assign
+            string sortCode = "774110";
+            string accountNo = "12335104";
+            Mock<IModulusWeightRepository> modulusWeightRepository = new Mock<IModulusWeightRepository>();
+
+            ModulusWeight modulusWeight = new ModulusWeight
+            {
+                SortCodeStart = 774100,
+                SortCodeEnd = 774599,
+                ModCheck = "MOD11",
+                WeightU = 5, WeightV = 8, WeightW = 6, WeightX = 2, WeightY = 3, WeightZ = 4,
+                WeightA = 2, WeightB = 1, WeightC = 2, WeightD = 1, WeightE = 2, WeightF = 1, WeightG = 7, WeightH = 8,
+                Exception = 4
+            };
+
+            modulusWeightRepository.Setup(x => x.GetBySortCode(sortCode)).Returns(modulusWeight);
+
+            var modulusCheck = new ModulusCheck(modulusWeightRepository.Object);
+
+            // act
+            var res = modulusCheck.ModulusCheckValidation(sortCode, accountNo);
+
+            // assert
+            Assert.AreEqual(false, res.IsCheckValid);
+            Assert.AreEqual(null, res.ExceptionNotProcessed);
+        }
     }
 }

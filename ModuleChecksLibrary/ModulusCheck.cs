@@ -9,7 +9,12 @@ using Entities;
 
 namespace ModuleChecksLibrary
 {
-    public class ModulusCheck
+    public interface IModulusCheck
+    {
+        ModulusCheckValidationResult ModulusCheckValidation(string sortCode, string accountNo);
+    }
+
+    public class ModulusCheck : IModulusCheck
     {
         private readonly IModulusWeightRepository modulusWeightRepository;
 
@@ -23,19 +28,47 @@ namespace ModuleChecksLibrary
             this.modulusWeightRepository = modulusCheckRepository;
         }
 
-        public ModulusCheckValidationResult ModulusCheckValidation(int sortCode, int accountNo)
+        public ModulusCheckValidationResult ModulusCheckValidation(string sortCode, string accountNo)
         {
             ModulusCheckValidationResult result = new ModulusCheckValidationResult
             {
                 IsCheckValid = false,
-                ExceptionNotProcessed = null
+                ExceptionNotProcessed = null,
+                IsAccountNoValid = true,
+                IsSortCodeValid = true
             };
 
-            // check if parameters are out of range
-            if (sortCode < 100000 || sortCode > 999999 || accountNo < 10000000 || accountNo > 99999999)
+            // check if parameters are valid
+            int sortCodeValidated;
+            int accountNoValidated;
+
+            if (!int.TryParse(sortCode, out sortCodeValidated))
+            {
+                result.IsSortCodeValid = false;
+            }
+
+            if (!int.TryParse(accountNo, out accountNoValidated))
+            {
+                result.IsAccountNoValid = false;
+            }
+
+            if (sortCode.Length != 6)
+            {
+                result.IsSortCodeValid = false;
+            }
+
+            if (accountNo.Length != 8)
+            {
+                result.IsAccountNoValid = false;
+            }
+
+            if (!result.IsSortCodeValid || !result.IsAccountNoValid)
             {
                 return result;
             }
+
+            result.IsSortCodeValid = true;
+            result.IsAccountNoValid = true;
 
             bool? isExceptionProcessed = null;
             var modulusWeight = modulusWeightRepository.GetBySortCode(sortCode);
@@ -70,7 +103,13 @@ namespace ModuleChecksLibrary
                     }
                 }
 
-                PostCheckWeightAdjustmentsForExceptions(modulusWeight.ModCheck, modulusWeight.Exception, ref isExceptionProcessed);
+                result.Remainder = total % modulusValue;
+
+                int expectedRemainder = 0;
+
+                PostCheckResultForExceptions(modulusWeight, fullCode, ref expectedRemainder, ref isExceptionProcessed);
+
+                result.IsCheckValid = (result.Remainder == expectedRemainder) ? true : false;
 
                 // Check if exception processed
                 if (modulusWeight.Exception != null)
@@ -81,7 +120,6 @@ namespace ModuleChecksLibrary
                     }
                 }
 
-                result.IsCheckValid = ((total % modulusValue) == 0) ? true : false;
                 return result;
             }
 
@@ -110,22 +148,22 @@ namespace ModuleChecksLibrary
                     isExceptionProcessed = true;
                 }
             }
-
         }
 
-        private void PostCheckWeightAdjustmentsForExceptions(string modCheck, int? exception, ref bool? isExceptionProcessed)
+        private void PostCheckResultForExceptions(ModulusWeight modulusWeight, string fullCode, ref int expectedRemainder, ref bool? isExceptionProcessed)
         {
-            if (exception != null)
+            if (modulusWeight.Exception != null)
             {
-                if (exception == 4)
+                if (modulusWeight.Exception == 4)
                 {
                     // Perform the standard modulus 11 check.
                     // After you have finished the check, ensure that the remainder is the same as the two - digit
                     // checkdigit; the checkdigit for exception 4 is gh from the original account number.
+
+                    expectedRemainder = int.Parse(fullCode.Substring(12, 2));
                     isExceptionProcessed = true;
                 }
             }
-
         }
     }
 }

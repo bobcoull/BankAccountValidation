@@ -9,3 +9,14 @@ C:\bob\git\BankAccountValidtion\DataAccess\obj\Debug\DataAccess.csproj.CoreCompi
 C:\bob\git\BankAccountValidtion\DataAccess\obj\Debug\DataAccess.csproj.CopyComplete
 C:\bob\git\BankAccountValidtion\DataAccess\obj\Debug\DataAccess.dll
 C:\bob\git\BankAccountValidtion\DataAccess\obj\Debug\DataAccess.pdb
+C:\bob\git\BankAccountValidation\DataAccess\bin\Debug\DataAccess.dll
+C:\bob\git\BankAccountValidation\DataAccess\bin\Debug\DataAccess.pdb
+C:\bob\git\BankAccountValidation\DataAccess\bin\Debug\DataAccess.Interfaces.dll
+C:\bob\git\BankAccountValidation\DataAccess\bin\Debug\Entities.dll
+C:\bob\git\BankAccountValidation\DataAccess\bin\Debug\DataAccess.Interfaces.pdb
+C:\bob\git\BankAccountValidation\DataAccess\bin\Debug\Entities.pdb
+C:\bob\git\BankAccountValidation\DataAccess\obj\Debug\DataAccess.csprojAssemblyReference.cache
+C:\bob\git\BankAccountValidation\DataAccess\obj\Debug\DataAccess.csproj.CoreCompileInputs.cache
+C:\bob\git\BankAccountValidation\DataAccess\obj\Debug\DataAccess.csproj.CopyComplete
+C:\bob\git\BankAccountValidation\DataAccess\obj\Debug\DataAccess.dll
+C:\bob\git\BankAccountValidation\DataAccess\obj\Debug\DataAccess.pdb

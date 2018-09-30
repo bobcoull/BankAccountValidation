@@ -4,21 +4,30 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using ModuleChecksLibrary;
 
 namespace BankAccountValidationWeb.Controllers.api
 {
     public class BankDetailsValidateController : ApiController
     {
-        // GET api/<controller>
-        public IEnumerable<string> Get(string sortCode, string accountNo)
+        private IModulusCheck modulusCheck;
+
+        public BankDetailsValidateController()
         {
-            return new string[] { "value1", "value2" };
+            modulusCheck = new ModulusCheck();
         }
 
-        // GET api/<controller>/5
-        public string Get(int id)
+        public BankDetailsValidateController(IModulusCheck modulusCheck)
         {
-            return "value";
+            this.modulusCheck = modulusCheck;
+        }
+
+        // GET api/<controller>
+        public ModulusCheckValidationResult Get(string sortCode, string accountNo)
+        {
+            ModulusCheckValidationResult result = modulusCheck.ModulusCheckValidation(sortCode, accountNo);
+
+            return result;
         }
     }
 }

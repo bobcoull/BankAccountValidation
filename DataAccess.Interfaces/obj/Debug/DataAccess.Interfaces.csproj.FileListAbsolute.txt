@@ -7,3 +7,12 @@ C:\bob\git\BankAccountValidtion\DataAccess.Interfaces\obj\Debug\DataAccess.Inter
 C:\bob\git\BankAccountValidtion\DataAccess.Interfaces\bin\Debug\Entities.dll
 C:\bob\git\BankAccountValidtion\DataAccess.Interfaces\bin\Debug\Entities.pdb
 C:\bob\git\BankAccountValidtion\DataAccess.Interfaces\obj\Debug\DataAccess.Interfaces.csproj.CopyComplete
+C:\bob\git\BankAccountValidation\DataAccess.Interfaces\bin\Debug\DataAccess.Interfaces.dll
+C:\bob\git\BankAccountValidation\DataAccess.Interfaces\bin\Debug\DataAccess.Interfaces.pdb
+C:\bob\git\BankAccountValidation\DataAccess.Interfaces\bin\Debug\Entities.dll
+C:\bob\git\BankAccountValidation\DataAccess.Interfaces\bin\Debug\Entities.pdb
+C:\bob\git\BankAccountValidation\DataAccess.Interfaces\obj\Debug\DataAccess.Interfaces.csprojAssemblyReference.cache
+C:\bob\git\BankAccountValidation\DataAccess.Interfaces\obj\Debug\DataAccess.Interfaces.csproj.CoreCompileInputs.cache
+C:\bob\git\BankAccountValidation\DataAccess.Interfaces\obj\Debug\DataAccess.Interfaces.csproj.CopyComplete
+C:\bob\git\BankAccountValidation\DataAccess.Interfaces\obj\Debug\DataAccess.Interfaces.dll
+C:\bob\git\BankAccountValidation\DataAccess.Interfaces\obj\Debug\DataAccess.Interfaces.pdb
