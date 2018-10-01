@@ -526,5 +526,40 @@ namespace ModuleChecksLibrary.Tests.ModuleCheckTests
             Assert.AreEqual(false, res.IsCheckValid);
             Assert.AreEqual(null, res.ExceptionNotProcessed);
         }
+
+
+        [Test]
+        public void Return_True_For_Valid_SortCode_AccountNumber_MOD11_With_Large_And_Negative_Weights()
+        {
+            //Exception 4:
+            // After you have finished the check, ensure that the remainder is the same as the two-digit
+            // checkdigit; the checkdigit for exception 4 is gh from the original account number
+
+            // assign
+            string sortCode = "774110";
+            string accountNo = "12335104";
+            Mock<IModulusWeightRepository> modulusWeightRepository = new Mock<IModulusWeightRepository>();
+
+            ModulusWeight modulusWeight = new ModulusWeight
+            {
+                SortCodeStart = 774100,
+                SortCodeEnd = 774599,
+                ModCheck = "MOD11",
+                WeightU = 50, WeightV = 800, WeightW = 60, WeightX = -15, WeightY = -20, WeightZ = 400,
+                WeightA = 20, WeightB = 100, WeightC = -22, WeightD = -111, WeightE = 200, WeightF = 10, WeightG = 70, WeightH = 800,
+                Exception = 999
+            };
+
+            modulusWeightRepository.Setup(x => x.GetBySortCode(sortCode)).Returns(modulusWeight);
+
+            var modulusCheck = new ModulusCheck(modulusWeightRepository.Object);
+
+            // act
+            var res = modulusCheck.ModulusCheckValidation(sortCode, accountNo);
+
+            // assert
+            Assert.AreEqual(true, res.IsCheckValid);
+            Assert.AreEqual(999, res.ExceptionNotProcessed);
+        }
     }
 }

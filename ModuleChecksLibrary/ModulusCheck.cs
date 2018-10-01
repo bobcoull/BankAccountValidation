@@ -95,13 +95,11 @@ namespace ModuleChecksLibrary
                 //TODO: WeightString belowe assumes weight numbers are single digits.
                 // However some are more than one digit and some are negative.
                 // Change this to be an array of ints to solve the problem
-
-                string weightDigitsString = modulusWeight.WeightString;
                 
                 for (var i = 0; i < 14; i++)
                 {
                     int fullCodeDigit = int.Parse(fullCode.Substring(i, 1));
-                    int weightDigit = int.Parse(weightDigitsString.Substring(i, 1));
+                    int weightDigit = modulusWeight.Weights[i];
 
                     int digitTotal = fullCodeDigit * weightDigit;
 
