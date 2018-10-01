@@ -39,6 +39,16 @@ namespace ModuleChecksLibrary
             };
 
             // check if parameters are valid
+            if (sortCode == null)
+            {
+                result.IsSortCodeValid = false;
+            }
+
+            if (accountNo == null)
+            {
+                result.IsAccountNoValid = false;
+            }
+
             int sortCodeValidated;
             int accountNoValidated;
 
@@ -52,12 +62,12 @@ namespace ModuleChecksLibrary
                 result.IsAccountNoValid = false;
             }
 
-            if (sortCode.Length != 6)
+            if (sortCode != null && sortCode.Length != 6)
             {
                 result.IsSortCodeValid = false;
             }
 
-            if (accountNo.Length != 8)
+            if (accountNo != null && accountNo.Length != 8)
             {
                 result.IsAccountNoValid = false;
             }
@@ -81,6 +91,10 @@ namespace ModuleChecksLibrary
                 int total = 0;
 
                 PreCheckWeightAdjustmentsForExceptions(modulusWeight, ref isExceptionProcessed);
+
+                //TODO: WeightString belowe assumes weight numbers are single digits.
+                // However some are more than one digit and some are negative.
+                // Change this to be an array of ints to solve the problem
 
                 string weightDigitsString = modulusWeight.WeightString;
                 

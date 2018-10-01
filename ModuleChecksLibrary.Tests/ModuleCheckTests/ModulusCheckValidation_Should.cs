@@ -14,6 +14,34 @@ namespace ModuleChecksLibrary.Tests.ModuleCheckTests
     public class ModulusCheckValidation_Should
     {
         [Test]
+        public void Return_False_If_Sort_Code_Is_Null()
+        {
+            // assign
+            var modulusCheck = new ModulusCheck();
+
+            // act
+            var res = modulusCheck.ModulusCheckValidation(null, "12345678");
+
+            // assert
+            Assert.AreEqual(false, res.IsCheckValid);
+            Assert.AreEqual(false, res.IsSortCodeValid);
+        }
+
+        [Test]
+        public void Return_False_If_Account_No_Is_Null()
+        {
+            // assign
+            var modulusCheck = new ModulusCheck();
+
+            // act
+            var res = modulusCheck.ModulusCheckValidation("123456", null);
+
+            // assert
+            Assert.AreEqual(false, res.IsCheckValid);
+            Assert.AreEqual(false, res.IsAccountNoValid);
+        }
+
+        [Test]
         public void Return_False_If_Sort_Code_Less_Than_6_Digits()
         {
             // assign
